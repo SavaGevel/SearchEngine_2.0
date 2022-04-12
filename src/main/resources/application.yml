@@ -1,0 +1,19 @@
+spring:
+  jpa:
+    database: MySQL
+    hibernate:
+      ddl-auto: create
+  datasource:
+    url: jdbc:mysql://localhost:3306/search_engine?useSSL=true
+    username: search_engine_user
+    password: 23242526Tyu
+
+sites:
+  -
+    url: https://ipfran.ru
+    name: Институт прикладной физики Российской академии наук
+
+useragent: Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rvl1.8.1.6) Gecko/20070725 Firefox/2.0.0.6
+referrer: http://www.google.com
+
+webinterfacepath: admin
