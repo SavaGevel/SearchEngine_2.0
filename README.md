@@ -37,5 +37,6 @@ Also there is line for page url and button add/update which starts page indexing
 ![Снимок экрана 2022-04-16 в 19 08 33](https://user-images.githubusercontent.com/102177550/163682746-7550ca3b-e863-42e4-96a3-5272912bd3fa.png)
 
 Search inset contains drop-down list with sites and search query line.
+If you want to search on all sites you should choose All sites in drop-down list.
 
 ![Снимок экрана 2022-04-16 в 19 14 29](https://user-images.githubusercontent.com/102177550/163682908-5587b809-3b39-4f4f-90fa-4b6e3fd6600b.png)
