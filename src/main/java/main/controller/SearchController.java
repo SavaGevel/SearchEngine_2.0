@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Map;
 
+/**
+ * Default controller for Search Engine
+ */
+
 @Controller
 public class SearchController {
 
@@ -25,8 +29,12 @@ public class SearchController {
     @Autowired
     private FieldRepository fieldRepository;
 
+    /**
+     * Use webinterfacepath according to application.yml
+     * @return html template
+     */
 
-    @GetMapping("/")
+    @GetMapping("/${webinterfacepath}")
     private String getInitialPage() {
         if(siteRepository.findAll().isEmpty()) {
             updateSiteList();
@@ -37,6 +45,10 @@ public class SearchController {
         return "index";
     }
 
+    /**
+     * Update site table according to application.yml
+     */
+
     @Transactional
     private void updateSiteList() {
         for(Map<String, String> site : config.getSites()) {
@@ -45,6 +57,10 @@ public class SearchController {
             siteRepository.save(s);
         }
     }
+
+    /**
+     * Insert fields' values in to field table
+     */
 
     @Transactional
     private void updateFieldTable() {

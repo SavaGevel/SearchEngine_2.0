@@ -4,6 +4,10 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Entity that describes site table which contains all sites info
+ */
+
 @Entity
 @Table(name = "site")
 public class Site {

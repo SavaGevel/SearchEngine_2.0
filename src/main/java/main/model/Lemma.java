@@ -1,12 +1,11 @@
 package main.model;
 
-import org.hibernate.Session;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import java.util.List;
+
+/**
+ * Entity that describes lemma table which contains all lemmas info
+ */
 
 @Entity
 @Table(name = "lemma")
@@ -16,6 +15,7 @@ public class Lemma {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(unique = false)
     private String lemma;
 
     private int frequency;

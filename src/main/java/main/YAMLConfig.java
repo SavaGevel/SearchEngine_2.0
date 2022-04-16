@@ -3,14 +3,18 @@ package main;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
-import java.util.HashMap;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+
+/**
+ * Entity that contains info from application.yml
+ */
+
 @Configuration
+@EnableScheduling
 @EnableConfigurationProperties
 @ConfigurationProperties
 public class YAMLConfig {

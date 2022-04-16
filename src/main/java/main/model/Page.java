@@ -3,6 +3,10 @@ package main.model;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * Entity that describes page table which contains all pages info
+ */
+
 @Entity
 @Table(name = "page")
 public class Page {
@@ -11,7 +15,7 @@ public class Page {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(columnDefinition = "VARCHAR(225)")
+    @Column(columnDefinition = "VARCHAR(225)", unique = false)
     private String path;
 
     private int code;
@@ -19,7 +23,7 @@ public class Page {
     @Column(columnDefinition = "MEDIUMTEXT")
     private String content;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "index_table",
             joinColumns = {@JoinColumn(name = "page_id")},
             inverseJoinColumns = {@JoinColumn(name = "lemma_id")})

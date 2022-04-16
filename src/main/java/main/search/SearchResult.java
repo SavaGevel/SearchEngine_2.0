@@ -2,6 +2,10 @@ package main.search;
 
 import main.model.Site;
 
+/**
+ * Entity that describes structure of search result
+ */
+
 public class SearchResult {
 
 

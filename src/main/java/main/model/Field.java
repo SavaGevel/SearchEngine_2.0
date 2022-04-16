@@ -2,6 +2,10 @@ package main.model;
 
 import javax.persistence.*;
 
+/**
+ * Entity that describes field table which contains info about html fields
+ */
+
 @Entity
 @Table(name = "field")
 public class Field {

@@ -2,6 +2,10 @@ package main.model;
 
 import javax.persistence.*;
 
+/**
+ * Entity that describes index table which contains all index info
+ */
+
 @Entity
 @Table(name = "index_table")
 public class Index {

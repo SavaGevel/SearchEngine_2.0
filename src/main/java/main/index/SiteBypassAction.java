@@ -6,11 +6,14 @@ import main.model.Site;
 import main.model.SiteStatus;
 import main.repositories.*;
 import org.jsoup.Jsoup;
-import org.springframework.scheduling.annotation.Async;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.RecursiveAction;
+
+/**
+ * Action that bypasses all site's pages and start indexing them in different threads
+ */
 
 public class SiteBypassAction extends RecursiveAction {
 
@@ -52,28 +55,46 @@ public class SiteBypassAction extends RecursiveAction {
         this.site = site;
     }
 
+    /**
+     * Checks site status
+     * Check is page was already visited. If not, begin page indexing.
+     * Create new action for every link on that page
+     */
+
     @Override
     public void compute() {
 
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        if (!siteRepository.findSiteByUrl(site.getUrl()).getStatus().equals(SiteStatus.FAILED)) {
 
-        if (isNotVisited()) {
-            Page page = new Page(url, site);
-            new Thread(new PageIndexer(config, pageRepository, lemmaRepository, indexRepository, fieldRepository, siteRepository, page)).start();
-            for (String path : getLinksOnPage()) {
-                new SiteBypassAction(config, siteRepository, pageRepository, lemmaRepository, indexRepository, fieldRepository, path, site).invoke();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            if (isNotVisited()) {
+                Page page = new Page(url, site);
+                new Thread(new PageIndexer(config, pageRepository, lemmaRepository, indexRepository, fieldRepository, siteRepository, page)).start();
+                for (String path : getLinksOnPage()) {
+                    new SiteBypassAction(config, siteRepository, pageRepository, lemmaRepository, indexRepository, fieldRepository, path, site).invoke();
+                }
             }
         }
     }
 
+    /**
+     * Checks if page was already visited
+     * @return true if page is not visited
+     */
 
     private boolean isNotVisited() {
         return pageRepository.findPageByPathAndSite(url, site) == null;
     }
+
+    /**
+     * Gets all links on page and filter them
+     * @return list of links that lead only to site's pages
+     */
 
     private List<String> getLinksOnPage() {
         try {
